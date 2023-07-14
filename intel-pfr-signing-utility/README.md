@@ -2,7 +2,7 @@
 
 Run command: (not yet)
 ```
-docker run --it sammtcbn/intel-pfr-signing-utility bash
+docker run -it sammtcbn/intel-pfr-signing-utility bash
 ```
 
 # Release
