@@ -1,5 +1,5 @@
 #!/bin/bash
-TAG=8.0
+TAG=8.2.0
 
 echo docker rmi -f mysql:${TAG}
 docker rmi -f mysql:${TAG}
