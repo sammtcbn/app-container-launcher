@@ -4,6 +4,7 @@
 
 MYSQL_ROOT_PW=1234
 CMD='SHOW DATABASES;'
+echo ${CMD}
 docker exec -it mysql bash -c "mysql -u root -p${MYSQL_ROOT_PW} -e \"${CMD}\""
 
 # Result:
