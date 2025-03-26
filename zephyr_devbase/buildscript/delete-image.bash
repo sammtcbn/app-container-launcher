@@ -1,6 +1,9 @@
 #!/bin/bash
-echo docker rmi -f sammtcbn/zephyr_devbase
-docker rmi -f sammtcbn/zephyr_devbase
+
+source env.bash || exit 1
+
+echo docker rmi -f ${img}
+docker rmi -f ${img}
 
 echo
 
