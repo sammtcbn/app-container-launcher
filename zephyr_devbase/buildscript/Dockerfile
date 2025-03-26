@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 ARG USERNAME=foo
 ARG USERHOME=/home/$USERNAME
+#ARG USERPW=bar
 
 ENV TZ=Asia/Taipei
 ENV LANG=en_US.UTF-8
@@ -30,7 +31,7 @@ RUN locale-gen "en_US.UTF-8"
 
 RUN rm -rf /var/lib/apt/lists/*
 
-#RUN useradd -ms /bin/bash $USERNAME && echo "foo:bar" | chpasswd && adduser $USERNAME sudo
+#RUN useradd -ms /bin/bash $USERNAME && echo "$USERNAME:$USERPW" | chpasswd && adduser $USERNAME sudo
 RUN useradd -ms /bin/bash $USERNAME
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -53,7 +54,7 @@ RUN ./setup.sh -t all -c
 
 RUN touch ~/.zephyrrc && \
   echo "export ZEPHYR_TOOLCHAIN_VARIANT=zephyr" > ~/.zephyrrc && \
-  echo "export ZEPHYR_SDK_INSTALL_DIR=/home/foo/zephyr-sdk-0.16.9" >> ~/.zephyrrc
+  echo "export ZEPHYR_SDK_INSTALL_DIR=$USERHOME/zephyr-sdk-0.16.9" >> ~/.zephyrrc
 
 # install required python packages for Zephyr develop environment
 RUN pip3 --no-cache-dir install --user -r $USERHOME/python_requirements/requirements.txt
@@ -64,7 +65,7 @@ RUN pip3 --no-cache-dir install --user -r $USERHOME/python_requirements/requirem
 USER $USERNAME
 WORKDIR $USERHOME
 
-ENV PATH=/home/foo/.local/bin:$PATH
+ENV PATH=$USERHOME/.local/bin:$PATH
 
 # Launch bash shell by default
 CMD ["/bin/bash"]
