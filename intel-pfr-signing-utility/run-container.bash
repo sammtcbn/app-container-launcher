@@ -1,2 +1,5 @@
 #!/bin/bash
-docker run --name intel-pfr-signing-utility --rm -it -v $(pwd):/home/intel/workspace --workdir="/home/intel/workspace" sammtcbn/intel-pfr-signing-utility bash
+source env.bash || exit 1
+
+docker run --name ${contname} --rm -it -v $(pwd):${contws} --workdir="${contws}" ${img} bash
+

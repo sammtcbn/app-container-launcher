@@ -1,6 +1,9 @@
 #!/bin/bash
 
-docker rmi -f sammtcbn/intel-pfr-signing-utility
+source env.bash || exit 1
+
+echo docker rmi -f ${img}
+docker rmi -f ${img}
 
 echo
 
